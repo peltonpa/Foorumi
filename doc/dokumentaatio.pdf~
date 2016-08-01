@@ -1,0 +1,36 @@
+1. Johdanto
+
+Työn aiheena on keskustelufoorumi koulun users-palvelimelle.
+
+Tarkoituksena on, että foorumille voi rekisteröityä ja kirjautua käyttäjäksi, l
+
+Foorumi toteutetaan HTML:llä, CSS:llä, Javascriptillä,  PHP:llä ja PostgreSQL:l
+
+2. Käyttötapaukset
+
+
+Käyttäjäryhmät: 
+- Rekisteröitynyt käyttäjä
+        - käyttäjä, joka on rekisteröitynyt ja kirjautunut foorumille osallistuakseen keskusteluihin
+
+- Admin
+	- foorumin ylläpitäjä
+
+- Rekisteröimätön käyttäjä
+        - käyttäjä, joka ei ole rekisteröitynyt osallistuakseen keskusteluun
+
+Käyttötapauskuvaukset:
+
+- Rekisteröitynyt käyttäjä:
+	- voi kirjoittaa, lukea ja hakea viestejä, editoida omia viestejään ja luoda uusia aiheita tai hakea keskusteluista hakusanoilla
+
+- Admin
+	- voi rekisteröityneen käyttäjän oikeuksien lisäksi poistaa ja editoida muiden viestejä ja luoda uusia alueita (ja poistaa alueita)
+
+- Rekisteröimätön käyttäjä
+	- voi lukea viestejä tai rekisteröityä ja kirjautua saadakseen rekisteröityneen käyttäjän toiminnallisuudet
+
+
+
+
+
