@@ -9,7 +9,7 @@ $routes->get('/hiekkalaatikko', function() {
 });
 
 $routes->get('/etusivu', function() {
-    HelloWorldController::etusivu();
+    AlueController::index();
 });
 
 $routes->get('/keskustelualue', function() {

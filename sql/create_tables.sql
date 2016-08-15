@@ -7,12 +7,12 @@ CREATE TABLE Kayttaja(
 
 CREATE TABLE Alue(
 	id SERIAL PRIMARY KEY,
-        viimeinenViestiId INTEGER REFERENCES Viesti(id),
 	nimi varchar(40) NOT NULL
 );
 
 CREATE TABLE Viesti(
 	id SERIAL PRIMARY KEY,
+        ketjuId INTEGER REFERENCES Viesti(id),
 	kayttajaId INTEGER REFERENCES Kayttaja(id),
 	alueId INTEGER REFERENCES Alue(id),
 	sisalto varchar(300) NOT NULL,

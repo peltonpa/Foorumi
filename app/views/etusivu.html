@@ -1,5 +1,5 @@
 {% extends "base.html"%}
-{% block content%}
+{% block content %}
 
 <form class="form-inline">
     <div class="form-group">
@@ -16,15 +16,13 @@
             <th>Keskustelualue</th>
         </tr>
     </thead>
-    
+
     <tbody>
-        {% for viesti in viestit %}
+        {% for alue in alueet %}
         <tr>
-            <td><a href="{{base_path}}/{{alue.id}">Hevoskeskustelu</a></td>
+            <td><a href="{{base_path}}/alue/{{alue.id}}">{{alue.nimi}}</a></td>
         </tr>
-        <tr>
-            <td><a href="http://peltonpa.users.cs.helsinki.fi/foorumi/keskustelualue">Kaikenlainen muu keskustelu</a></td>
-        </tr>
+        {% endfor %}
     </tbody>
 
-{% endblock %}
+    {% endblock %}
