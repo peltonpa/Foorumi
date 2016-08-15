@@ -7,6 +7,7 @@ CREATE TABLE Kayttaja(
 
 CREATE TABLE Alue(
 	id SERIAL PRIMARY KEY,
+        viimeinenViestiId INTEGER REFERENCES Viesti(id),
 	nimi varchar(40) NOT NULL
 );
 
@@ -20,7 +21,12 @@ CREATE TABLE Viesti(
 );
 
 
-CREATE TABLE Lukeneet(
+CREATE TABLE Tagiliitos(
 	viestiId INTEGER REFERENCES Viesti(id),
-	kayttajaId INTEGER REFERENCES Kayttaja(id)
+	tagiId INTEGER REFERENCES Tagi(id)
+);
+
+CREATE TABLE Tagi(
+        id SERIAL PRIMARY KEY,
+        tagi varchar(20) NOT NULL
 );

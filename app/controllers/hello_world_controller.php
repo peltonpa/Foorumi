@@ -1,5 +1,6 @@
 <?php
 
+  require 'app/models/viesti.php';
   class HelloWorldController extends BaseController{
 
     public static function index(){
@@ -9,6 +10,11 @@
 
     public static function sandbox(){
       // Testaa koodiasi täällä
+        $alue = Alue::find(1);
+        $alueet = Alue::all();
+        
+        Kint::dump($alue);
+        Kint::dump($alueet);
       View::make('helloworld.html');
     }
     

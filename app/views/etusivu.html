@@ -1,0 +1,30 @@
+{% extends "base.html"%}
+{% block content%}
+
+<form class="form-inline">
+    <div class="form-group">
+        <label for="Haku">Haku</label>
+        <input type="text" class="form-control" id="Haku" placeholder="Hakusana...">
+    </div>
+    <button type="submit" class="btn btn-default">Hae</button>
+</form>
+
+<h1>Keskustelut</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Keskustelualue</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for viesti in viestit %}
+        <tr>
+            <td><a href="{{base_path}}/{{alue.id}">Hevoskeskustelu</a></td>
+        </tr>
+        <tr>
+            <td><a href="http://peltonpa.users.cs.helsinki.fi/foorumi/keskustelualue">Kaikenlainen muu keskustelu</a></td>
+        </tr>
+    </tbody>
+
+{% endblock %}
