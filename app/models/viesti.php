@@ -2,7 +2,7 @@
 
 class Viesti extends BaseModel {
 
-    public $id, $kayttajaId, $alueId, $sisalto, $paivays, $otsikko;
+    public $id, $ketjuId, $kayttajaId, $sisalto, $paivays;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -19,8 +19,8 @@ class Viesti extends BaseModel {
         foreach ($rows as $row) {
             $viestit[] = new Viesti(array(
                 'id' => $row['id'],
-               // 'kayttajaId' => $row['kayttajaId'],
-              //  'alueId' => $row['alueId'],
+                'ketjuId' => $row['ketjuId'],
+                'kayttajaId' => $row['kayttajaId'],
                 'sisalto' => $row['sisalto'],
                 'paivays' => $row['paivays'],
                 'otsikko' => $row['otsikko']
@@ -37,8 +37,8 @@ class Viesti extends BaseModel {
         if ($row) {
             $viesti = new Viesti(array(
                 'id' => $row['id'],
-               // 'kayttajaId' => $row['kayttajaId'],
-                //'alueId' => $row['alueId'],
+                'ketjuId' => $row['ketjuId'],
+                'kayttajaId' => $row['kayttajaId'],
                 'sisalto' => $row['sisalto'],
                 'paivays' => $row['paivays'],
                 'otsikko' => $row['otsikko']

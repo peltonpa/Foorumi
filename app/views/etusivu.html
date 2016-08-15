@@ -14,13 +14,19 @@
     <thead>
         <tr>
             <th>Keskustelualue</th>
+            <th>Viimeisin viesti</th>
+            <th>Kirjoittaja</th>
+            <th>Päivämäärä</th>
         </tr>
     </thead>
 
     <tbody>
         {% for alue in alueet %}
         <tr>
-            <td><a href="{{base_path}}/alue/{{alue.id}}">{{alue.nimi}}</a></td>
+            <td><a href="{{base_path}}/alue/{{alue.id}}">{{alue.nimi}}&nbsp;</a></td>
+            <td><a href="#">Ominaisuus ei vielä tuettu&nbsp;</a></td>
+            <td>Ominaisuus ei vielä tuettu&nbsp;</td>
+            <td>Ominaisuus ei vielä tuettu&nbsp;</td>
         </tr>
         {% endfor %}
     </tbody>

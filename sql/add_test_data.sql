@@ -2,16 +2,20 @@ INSERT INTO Kayttaja (nimi, luomispaivamaara, password) VALUES ('Kartsa', NOW(),
 
 INSERT INTO Kayttaja (nimi, luomispaivamaara, password) VALUES ('meetvurstimies', NOW(), 'metukka1');
 
-INSERT INTO Alue (nimi) VALUES ('Hevoskeskustelua');
-
 INSERT INTO Alue (nimi) VALUES ('juoppokeskustelua');
 
 INSERT INTO Alue (nimi) VALUES ('peruskeskustelua');
 
-INSERT INTO Viesti (kayttajaId, alueId, sisalto, otsikko, paivays) VALUES (1, 2, 'viina vie', 'olen känni', NOW());
+INSERT INTO Ketju (alueId, otsikko) VALUES (1, 'olen kännisä taas');
 
-INSERT INTO Viesti (kayttajaId, alueId, sisalto, otsikko, paivays) VALUES (2, 1, 'jep', 'mun hevosen nimi on meetvursti', NOW());
+INSERT INTO Ketju (alueId, otsikko) VALUES (1, 'viina vie miestä');
 
-INSERT INTO Viesti (ketjuId, kayttajaId, alueId, sisalto, otsikko, paivays) VALUES (1, 2, 2, 'ei hitto', 'voi jitto', NOW());
+INSERT INTO Ketju (alueId, otsikko) VALUES (2, 'mun hepan nimi on meetvursti');
 
-INSERT INTO Viesti (kayttajaId, alueId, sisalto, otsikko, paivays) VALUES (1, 2, 'eiii', 'olen taas kännisä', NOW());
+INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (1, 1, 'viina vie', NOW());
+
+INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (2, 2, 'jep', NOW());
+
+INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (1, 2, 'ei hitto', NOW());
+
+INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (1, 1, 'eiii', NOW());

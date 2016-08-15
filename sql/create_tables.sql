@@ -10,19 +10,23 @@ CREATE TABLE Alue(
 	nimi varchar(40) NOT NULL
 );
 
+CREATE TABLE Ketju(
+        id SERIAL PRIMARY KEY,
+        alueId INTEGER REFERENCES Alue(id),
+        otsikko varchar(40)
+);
+
 CREATE TABLE Viesti(
 	id SERIAL PRIMARY KEY,
-        ketjuId INTEGER REFERENCES Viesti(id),
+        ketjuId INTEGER REFERENCES Ketju(id),
 	kayttajaId INTEGER REFERENCES Kayttaja(id),
-	alueId INTEGER REFERENCES Alue(id),
 	sisalto varchar(300) NOT NULL,
-	otsikko varchar(40) NOT NULL,
 	paivays DATE NOT NULL
 );
 
 
 CREATE TABLE Tagiliitos(
-	viestiId INTEGER REFERENCES Viesti(id),
+	ketjuId INTEGER REFERENCES Ketju(id),
 	tagiId INTEGER REFERENCES Tagi(id)
 );
 

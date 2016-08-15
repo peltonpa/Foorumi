@@ -1,7 +1,7 @@
 <?php
 
 $routes->get('/', function() {
-    HelloWorldController::index();
+    AlueController::index();
 });
 
 $routes->get('/hiekkalaatikko', function() {
@@ -22,5 +22,9 @@ $routes->get('/ketju', function() {
 
 $routes->get('/kirjautuminen', function() {
 HelloWorldController::kirjautuminen();
+});
+
+$routes->get('/alue/:id', function($id) {
+    AlueController::show($id);
 });
 

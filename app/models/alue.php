@@ -27,7 +27,7 @@ class Alue extends BaseModel {
 
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Alue WHERE id = :id LIMIT 1');
-        $query->execute();
+        $query->execute(array('id' => $id));
 
         $row = $query->fetch();
 
@@ -39,6 +39,16 @@ class Alue extends BaseModel {
         }
 
         return $alue;
+    }
+    
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Alue (nimi) VALUES (:nimi) RETURNING id');
+        
+        $query->execute(array('nimi' => $this->nimi));
+        
+        $row = $query->fetch();
+        
+        $this->id = $row['id'];
     }
 
 }

@@ -9,29 +9,19 @@
     <button type="submit" class="btn btn-default">Hae</button>
 </form>
 
-<h1>Kaikenlainen muu keskustelu</h1>
+<h1>{{nimi}}</h1>
 <table>
     <thead>
         <tr>
             <th>Aihe</th>
-            <th>Viimeisin kirjoittaja</th>
-            <th>Viimeisimmän viestin ajankohta</th>
         </tr>
     </thead>
     <tbody>
+        {% for ketju in ketjut %}
         <tr>
-            <td><a href="http://peltonpa.users.cs.helsinki.fi/foorumi/ketju">Ramasee nii pirusti</a></td>
-            <td>Kartsa77</td>
-            <td>1.1.2016</td>
-        <tr>
-            <td><a href="#">Ei voi muuta sanoo ku hattuu nostaa</a></td>
-            <td>Mentulan Jartsa</td>
-            <td>1.4.2015</td>
-        <tr>
-            <td><a href="#">Ei hitto söin liikaa ja nyt turvottaa</a></td>
-            <td>Activia-mainoksen tyyppi</td>
-            <td>1.2.2000</td>
+            <td><a href="{{base_path}}/ketjut/{{ketju.id}}">{{ketju.otsikko}}&nbsp;</a></td>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
 
