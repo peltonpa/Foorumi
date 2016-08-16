@@ -25,6 +25,11 @@ class Alue extends BaseModel {
         return $alueet;
     }
 
+    public static function getNimi($id) {
+        $alue = self::find($id);
+        return $alue->nimi;
+    }
+    
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Alue WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));

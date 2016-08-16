@@ -7,6 +7,16 @@ class Ketju extends BaseModel {
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
+    
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Ketju (alueId, otsikko) VALUES (:alueId, :otsikko) RETURNING id');
+        
+        $query->execute(array('alueId' => $this->alueId, 'otsikko' => $this->otsikko));
+        
+        $row = $query->fetch();
+        
+        $this->id = $row['id'];
+    }
 
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Ketju');
@@ -19,7 +29,7 @@ class Ketju extends BaseModel {
         foreach ($rows as $row) {
             $ketjut[] = new Ketju(array(
                 'id' => $row['id'],
-                'alueid' => $row['alueid'],
+                'alueId' => $row['alueid'],
                 'otsikko' => $row['otsikko']
             ));
         }
@@ -34,18 +44,25 @@ class Ketju extends BaseModel {
         if ($row) {
             $ketju = new Ketju(array(
                 'id' => $row['id'],
-                'alueid' => $row['alueid'],
+                'alueId' => $row['alueid'],
                 'otsikko' => $row['otsikko']
             ));
 
             return $ketju;
         }
     }
-    
+
     public static function alueenKetjut($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Ketju WHERE alueid = :id');
+        $ketjut = self::all();
+        $palautusketjut = array();
         
-        
+        foreach ($ketjut as $ketju) {
+            if ($ketju->alueId == $id) {
+                $palautusketjut[] = $ketju;
+            }
+        }
+
+        return $palautusketjut;
     }
 
 }

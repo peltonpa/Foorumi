@@ -12,7 +12,7 @@ CREATE TABLE Alue(
 
 CREATE TABLE Ketju(
         id SERIAL PRIMARY KEY,
-        alueId INTEGER REFERENCES Alue(id),
+        alueId INTEGER REFERENCES Alue(id) NOT NULL,
         otsikko varchar(40)
 );
 

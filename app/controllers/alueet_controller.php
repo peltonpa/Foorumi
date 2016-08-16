@@ -13,10 +13,9 @@ class AlueController extends BaseController {
     }
     
     public static function show($id) {
-        $alue = Alue::find($id);
-        $nimi = array();
-        $nimi = $alue->nimi;
-        $ketjut = Ketju::all();
+        $nimi = Alue::getNimi($id);
+        $ketjut = Ketju::alueenKetjut($id);
+        $ketjut[] = $nimi;
         
         View::make('alue/keskustelualue.html', array('ketjut' => $ketjut));
         

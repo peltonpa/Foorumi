@@ -7,6 +7,16 @@ class Viesti extends BaseModel {
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
+    
+      public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (:ketjuId, :kayttajaId, :sisalto, :paivays) RETURNING id');
+        
+        $query->execute(array('ketjuId' => $this->ketjuId, 'kayttajaId' => $this->kayttajaId, 'sisalto' => $this->sisalto, 'paivays' => time()));
+        
+        $row = $query->fetch();
+        
+        $this->id = $row['id'];
+    }
 
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Viesti');
