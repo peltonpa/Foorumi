@@ -64,5 +64,10 @@ class Ketju extends BaseModel {
 
         return $palautusketjut;
     }
+    
+    public static function getOtsikko($id) {
+        $ketju = self::find($id);
+        return $ketju->otsikko;
+    }
 
 }

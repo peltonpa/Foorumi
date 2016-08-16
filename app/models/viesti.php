@@ -29,11 +29,10 @@ class Viesti extends BaseModel {
         foreach ($rows as $row) {
             $viestit[] = new Viesti(array(
                 'id' => $row['id'],
-                'ketjuId' => $row['ketjuId'],
-                'kayttajaId' => $row['kayttajaId'],
+                'ketjuId' => $row['ketjuid'],
+                'kayttajaId' => $row['kayttajaid'],
                 'sisalto' => $row['sisalto'],
-                'paivays' => $row['paivays'],
-                'otsikko' => $row['otsikko']
+                'paivays' => $row['paivays']
             ));
         }
         return $viestit;
@@ -47,15 +46,34 @@ class Viesti extends BaseModel {
         if ($row) {
             $viesti = new Viesti(array(
                 'id' => $row['id'],
-                'ketjuId' => $row['ketjuId'],
-                'kayttajaId' => $row['kayttajaId'],
+                'ketjuId' => $row['ketjuid'],
+                'kayttajaId' => $row['kayttajaid'],
                 'sisalto' => $row['sisalto'],
-                'paivays' => $row['paivays'],
-                'otsikko' => $row['otsikko']
+                'paivays' => $row['paivays']
             ));
 
             return $viesti;
         }
+    }
+    
+    public static function ketjunViestit($ketjuId) {
+        $query = DB::connection()->prepare('SELECT * FROM Viesti WHERE ketjuid = :ketjuid');
+        $query->execute(array('ketjuid' => $ketjuId));
+        $rows = $query->fetchAll();
+        
+        $viestit = array();
+        
+        foreach($rows as $row) {
+            $viestit[] = new Viesti(array(
+                'id' => $row['id'],
+                'ketjuId' => $row['ketjuid'],
+                'kayttajaId' => $row['kayttajaid'],
+                'sisalto' => $row['sisalto'],
+                'paivays' => $row['paivays']
+            ));
+        }
+        
+        return $viestit;
     }
 
 }

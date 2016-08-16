@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="bg-success">&nbsp;&nbsp;{{ viestit|last }}</h1>
+<br>
+
+{% for viesti in viestit if viesti.id != null %}
+<pre>
+    <b>Kirjoittaja:</b>
+    <mark>{{viesti.kirjoittajaid}}</mark>
+    <b>Ajankohta:</b>
+    <mark>{{viesti.paivays}}</mark>
+    <blockquote>{{viesti.sisalto}}</blockquote>
+</pre>
+{% endfor %}
+
+<form>
+    <textarea class="form-control" rows="4"></textarea>
+    <a class="btn btn-success" href="#">Lähetä viesti</a>
+</form>
+{% endblock %}

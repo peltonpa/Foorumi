@@ -16,6 +16,6 @@ INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (1, 1, 'viina 
 
 INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (2, 2, 'jep', NOW());
 
-INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (1, 2, 'ei hitto', NOW());
+INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (3, 2, 'ei hitto', NOW());
 
 INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (1, 1, 'eiii', NOW());

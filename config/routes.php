@@ -28,3 +28,7 @@ $routes->get('/alue/:id', function($id) {
     AlueController::show($id);
 });
 
+$routes->get('/ketju/:id', function($id) {
+    KetjuController::show($id);
+});
+
