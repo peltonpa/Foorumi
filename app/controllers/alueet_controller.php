@@ -13,11 +13,10 @@ class AlueController extends BaseController {
     }
     
     public static function show($id) {
-        $nimi = Alue::getNimi($id);
-        $ketjut = Ketju::alueenKetjut($id);
-        $ketjut[] = $nimi;
+        $nimi = Alue::get_nimi($id);
+        $ketjut = Ketju::alueen_ketjut($id);
         
-        View::make('alue/keskustelualue.html', array('ketjut' => $ketjut));
+        View::make('alue/keskustelualue.html', array('ketjut' => $ketjut, 'nimi' => $nimi));
         
     }
     

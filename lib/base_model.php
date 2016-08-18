@@ -25,5 +25,12 @@
 
       return $errors;
     }
+    
+    public static function string_pituus_maksimi($validoitava, $pituus) {
+        if(strlen($validoitava) > $pituus) {
+            return false;
+        }
+        return true;
+    }
 
   }

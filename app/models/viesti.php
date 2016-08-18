@@ -11,7 +11,7 @@ class Viesti extends BaseModel {
       public function save() {
         $query = DB::connection()->prepare('INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (:ketjuId, :kayttajaId, :sisalto, :paivays) RETURNING id');
         
-        $query->execute(array('ketjuId' => $this->ketjuId, 'kayttajaId' => $this->kayttajaId, 'sisalto' => $this->sisalto, 'paivays' => time()));
+        $query->execute(array('ketjuId' => $this->ketjuId, 'kayttajaId' => $this->kayttajaId, 'sisalto' => $this->sisalto, 'paivays' => date("M Y d")));
         
         $row = $query->fetch();
         
@@ -51,12 +51,12 @@ class Viesti extends BaseModel {
                 'sisalto' => $row['sisalto'],
                 'paivays' => $row['paivays']
             ));
-
+            
             return $viesti;
         }
     }
     
-    public static function ketjunViestit($ketjuId) {
+    public static function ketjun_viestit($ketjuId) {
         $query = DB::connection()->prepare('SELECT * FROM Viesti WHERE ketjuid = :ketjuid');
         $query->execute(array('ketjuid' => $ketjuId));
         $rows = $query->fetchAll();

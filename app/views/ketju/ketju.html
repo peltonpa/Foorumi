@@ -1,21 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="bg-success">&nbsp;&nbsp;{{ viestit|last }}</h1>
+<h1 class="bg-success">&nbsp;&nbsp;{{ otsikko }}</h1>
 <br>
 
-{% for viesti in viestit if viesti.id != null %}
+{% for viesti in viestit  %}
 <pre>
     <b>Kirjoittaja:</b>
-    <mark>{{viesti.kirjoittajaid}}</mark>
+    <mark>{{ kirjoittajat[viesti.kayttajaId - 1] }}</mark>
     <b>Ajankohta:</b>
-    <mark>{{viesti.paivays}}</mark>
-    <blockquote>{{viesti.sisalto}}</blockquote>
+    <mark>{{ viesti.paivays }}</mark>
+    <blockquote>{{ viesti.sisalto }}</blockquote>
 </pre>
 {% endfor %}
 
-<form>
-    <textarea class="form-control" rows="4"></textarea>
-    <a class="btn btn-success" href="#">Lähetä viesti</a>
+<form method="post" action="{{base_path}}/ketju">
+    <label>ketjuid</label>
+    <input type="text" name="ketjuid" class="form-control">
+    <label>kayttajaid</label>
+    <input type="text" name="kayttajaid" class="form-control">
+    <textarea name="sisalto" class="form-control" rows="4"></textarea>
+    <button type="submit" class="btn btn-success">Lähetä viesti</button>
 </form>
 {% endblock %}

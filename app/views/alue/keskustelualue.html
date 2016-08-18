@@ -9,7 +9,7 @@
     <button type="submit" class="btn btn-default">Hae</button>
 </form>
 
-<h1 class="bg-success"><br>&nbsp;&nbsp;{{ ketjut|last }}<br><br></h1>
+<h1 class="bg-success"><br>&nbsp;&nbsp;{{ nimi }}<br><br></h1>
 <table>
     <thead>
         <tr>
@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for ketju in ketjut if ketju.id != null %}
+        {% for ketju in ketjut %}
         <tr>
             <td><a href="{{base_path}}/ketju/{{ketju.id}}">{{ketju.otsikko}}&nbsp;</a></td>
         </tr>

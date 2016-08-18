@@ -25,7 +25,7 @@ class Alue extends BaseModel {
         return $alueet;
     }
 
-    public static function getNimi($id) {
+    public static function get_nimi($id) {
         $alue = self::find($id);
         return $alue->nimi;
     }

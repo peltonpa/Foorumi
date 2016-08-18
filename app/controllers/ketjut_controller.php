@@ -1,8 +1,9 @@
 <?php
 
-require 'app/models/alue.php';
-require 'app/models/viesti.php';
 require 'app/models/ketju.php';
+require 'app/models/viesti.php';
+require 'app/models/alue.php';
+require 'app/models/kayttaja.php';
 
 class KetjuController extends BaseController {
     
@@ -13,11 +14,15 @@ class KetjuController extends BaseController {
     }
     
     public static function show($id) {
-        $nimi = Ketju::getOtsikko($id);
-        $viestit = Viesti::ketjunViestit($id);
-        $viestit[] = $nimi;
+        $otsikko = Ketju::get_otsikko($id);
+        $kirjoittajat = Kayttaja::all();
+        $kirjoittajienNimet = array();
+        foreach ($kirjoittajat as $kirjoittaja) {
+            $kirjoittajienNimet[] = $kirjoittaja->nimi;
+        }
+        $viestit = Viesti::ketjun_viestit($id);
         
-        View::make('ketju/ketju.html', array('viestit' => $viestit));
+        View::make('ketju/ketju.html', array('viestit' => $viestit, 'otsikko' => $otsikko, 'kirjoittajat' => $kirjoittajienNimet));
     }
     
 }

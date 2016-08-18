@@ -16,8 +16,8 @@ $routes->get('/keskustelualue', function() {
     HelloWorldController::keskustelualue();
 });
 
-$routes->get('/ketju', function() {
-    HelloWorldController::ketju();
+$routes->post('/ketju', function() {
+    ViestiController::store();
 });
 
 $routes->get('/kirjautuminen', function() {

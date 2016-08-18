@@ -52,7 +52,7 @@ class Ketju extends BaseModel {
         }
     }
 
-    public static function alueenKetjut($id) {
+    public static function alueen_ketjut($id) {
         $ketjut = self::all();
         $palautusketjut = array();
         
@@ -65,7 +65,7 @@ class Ketju extends BaseModel {
         return $palautusketjut;
     }
     
-    public static function getOtsikko($id) {
+    public static function get_otsikko($id) {
         $ketju = self::find($id);
         return $ketju->otsikko;
     }
