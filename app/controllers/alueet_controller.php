@@ -20,4 +20,14 @@ class AlueController extends BaseController {
         
     }
     
+    public static function sandbox() {
+        $viesti = new Viesti(array(
+            'sisalto' => ''
+        ));
+        
+        $errors = $viesti->errors();
+        
+        Kint::dump($errors);
+    }
+    
 }

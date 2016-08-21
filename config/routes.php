@@ -5,15 +5,11 @@ $routes->get('/', function() {
 });
 
 $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
+    AlueController::sandbox();
 });
 
 $routes->get('/etusivu', function() {
     AlueController::index();
-});
-
-$routes->get('/keskustelualue', function() {
-    HelloWorldController::keskustelualue();
 });
 
 $routes->post('/ketju', function() {
@@ -21,7 +17,7 @@ $routes->post('/ketju', function() {
 });
 
 $routes->get('/kirjautuminen', function() {
-HelloWorldController::kirjautuminen();
+    HelloWorldController::kirjautuminen();
 });
 
 $routes->get('/alue/:id', function($id) {

@@ -17,6 +17,7 @@ class KetjuController extends BaseController {
         $otsikko = Ketju::get_otsikko($id);
         $kirjoittajat = Kayttaja::all();
         $kirjoittajienNimet = array();
+        
         foreach ($kirjoittajat as $kirjoittaja) {
             $kirjoittajienNimet[] = $kirjoittaja->nimi;
         }

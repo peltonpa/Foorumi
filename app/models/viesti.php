@@ -2,10 +2,11 @@
 
 class Viesti extends BaseModel {
 
-    public $id, $ketjuId, $kayttajaId, $sisalto, $paivays;
+    public $id, $ketjuId, $kayttajaId, $sisalto, $paivays, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validoi_sisalto');
     }
     
       public function save() {
@@ -74,6 +75,17 @@ class Viesti extends BaseModel {
         }
         
         return $viestit;
+    }
+    
+    public function validoi_sisalto() {
+        $errors = array();
+        if ($this->sisalto == '') {
+            $errors[] = 'Viesti ei saa olla tyhjä.';
+        }
+        if (strlen($this->sisalto > 299)) {
+            $errors[] = 'Viestin maksimipituus 300 merkkiä.';
+        }
+        return $errors;
     }
 
 }
