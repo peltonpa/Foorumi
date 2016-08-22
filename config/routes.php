@@ -16,8 +16,21 @@ $routes->post('/ketju', function() {
     ViestiController::store();
 });
 
+$routes->post('/uusiketju', function() {
+    KetjuController::store();
+});
+
 $routes->get('/kirjautuminen', function() {
-    HelloWorldController::kirjautuminen();
+    KayttajaController::kirjaudu();
+});
+
+$routes->post('/kirjautuminen', function() {
+    KayttajaController::kasittele();
+});
+    
+
+$routes->get('/alue/uusiketju/:id', function($id) {
+    KetjuController::uusiketju($id);
 });
 
 $routes->get('/alue/:id', function($id) {
@@ -26,5 +39,17 @@ $routes->get('/alue/:id', function($id) {
 
 $routes->get('/ketju/:id', function($id) {
     KetjuController::show($id);
+});
+
+$routes->get('/viesti/:id/edit', function($id) {
+    ViestiController::edit($id);
+});
+
+$routes->post('/viesti/:id/edit', function($id) {
+    ViestiController::update($id);
+});
+
+$routes->get('/viesti/:id/destroy', function($id) {
+    ViestiController::destroy($id);
 });
 

@@ -9,7 +9,24 @@
     <button type="submit" class="btn btn-default">Hae</button>
 </form>
 
-<h1 class="bg-success"><br>&nbsp;&nbsp;{{ nimi }}<br><br></h1>
+<br>
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if onnistui %}
+<div class="primary bg-info">
+    <li>{{onnistui}}</li>
+</div>
+{% endif %}
+
+<h1 class="bg-success"<span class="glyphicon glyphicon-align-left"><br>&nbsp;&nbsp;{{ nimi }}</span><br><br></h1>
 <table>
     <thead>
         <tr>
@@ -27,6 +44,6 @@
 
 <br>
 
-<a class="btn btn-warning" href="#">Uusi aihe</a>
+<a class="btn btn-warning" href="{{base_path}}/alue/uusiketju/{{alueid}}">Uusi aihe</a>
 
 {% endblock %}

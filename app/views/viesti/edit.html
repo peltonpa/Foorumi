@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form method="post" action="{{base_path}}/viesti/{{viesti.id}}/edit">
+    <textarea name="sisalto" class="form-control" rows="4">{{viesti.sisalto}}</textarea>
+    <button type="submit" class="btn btn-success">Lähetä viesti</button>
+    <input type="hidden" name="id" value="{{viesti.id}}"/>
+    <input type="hidden" name="ketjuid" value="{{viesti.ketjuId}}"/>
+    <input type="hidden" name="kayttajaid" value="{{viesti.kayttajaId}}"/>
+    <input type="hidden" name="paivays" value="{{viesti.paivays}}"/>
+</form>
+
+{% endblock %}

@@ -16,7 +16,7 @@ class Kayttaja extends BaseModel {
 
         $this->id = $row['id'];
     }
-    
+
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja');
         $query->execute();
@@ -36,7 +36,6 @@ class Kayttaja extends BaseModel {
     }
 
     public static function find($id) {
-
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
 
@@ -51,6 +50,26 @@ class Kayttaja extends BaseModel {
             ));
         }
         return $kayttaja;
+    }
+
+    public static function authenticate($nimi, $password) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi = :nimi AND password = :password LIMIT 1');
+        $query->execute(array('nimi' => $nimi, 'password' => $password));
+        $row = $query->fetch();
+
+        if ($row) {
+            $kayttaja = new Kayttaja(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'luomispaivamaara' => $row['luomispaivamaara'],
+                'password' => $row['password']
+            ));
+            return $kayttaja;
+        } else {
+            return null;
+        }
+         
+         
     }
 
 }

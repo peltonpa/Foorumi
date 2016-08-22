@@ -2,7 +2,7 @@
 
 class Alue extends BaseModel {
 
-    public $id, $nimi;
+    public $id, $nimi, $viimeinenViesti, $viimeinenKirjoittaja, $aika;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -55,5 +55,5 @@ class Alue extends BaseModel {
         
         $this->id = $row['id'];
     }
-
+    
 }

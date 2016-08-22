@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<form method="post" action="{{base_path}}/uusiketju">
+    <label>kayttajaid</label>
+    <input type="text" name="kayttajaid" class="form-control">
+    <textarea name="otsikko" class="form-control" rows="1">Otsikko</textarea>
+    <textarea name="sisalto" class="form-control" rows="4"></textarea>
+    <button type="submit" class="btn btn-success">Lähetä viesti</button>
+    <input type="hidden" name="url" value="" />
+    <input type="hidden" name="alueid" value="{{alueid}}" />
+</form>
+{% endblock %}

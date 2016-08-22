@@ -22,10 +22,11 @@ class BaseModel {
         foreach ($this->validators as $validator) {
             $error = $this->{$validator}();
             if (count($error) > 0) {
-                $errors[] = $error;
+                foreach($error as $err) {
+                    $errors[] = $err;
+                }
             }
         }
-
         return $errors;
     }
 

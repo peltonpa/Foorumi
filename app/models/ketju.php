@@ -6,6 +6,7 @@ class Ketju extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validoi_sisalto');
     }
     
     public function save() {
@@ -68,6 +69,17 @@ class Ketju extends BaseModel {
     public static function get_otsikko($id) {
         $ketju = self::find($id);
         return $ketju->otsikko;
+    }
+    
+    public function validoi_sisalto() {
+        $errors = array();
+        if($this->otsikko == '') {
+            $errors[] = 'Otsikko ei saa olla tyhjä.';
+        }
+        if (strlen($this->otsikko > 39)) {
+            $errors[] = 'Otsikon maksimipituus 40 merkkiä.';
+        }
+        return $errors;
     }
 
 }

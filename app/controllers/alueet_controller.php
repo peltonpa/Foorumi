@@ -8,7 +8,6 @@ class AlueController extends BaseController {
     
     public static function index() {
         $alueet = Alue::all();
-        
         View::make('etusivu.html', array('alueet' => $alueet));
     }
     
@@ -16,7 +15,7 @@ class AlueController extends BaseController {
         $nimi = Alue::get_nimi($id);
         $ketjut = Ketju::alueen_ketjut($id);
         
-        View::make('alue/keskustelualue.html', array('ketjut' => $ketjut, 'nimi' => $nimi));
+        View::make('alue/keskustelualue.html', array('ketjut' => $ketjut, 'nimi' => $nimi, 'alueid' => $id));
         
     }
     
@@ -28,6 +27,10 @@ class AlueController extends BaseController {
         $errors = $viesti->errors();
         
         Kint::dump($errors);
+    }
+    
+    public static function kirjautuminen() {
+        View::make('kirjautuminen/kirjautuminen.html');
     }
     
 }

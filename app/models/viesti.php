@@ -58,7 +58,7 @@ class Viesti extends BaseModel {
     }
     
     public static function ketjun_viestit($ketjuId) {
-        $query = DB::connection()->prepare('SELECT * FROM Viesti WHERE ketjuid = :ketjuid');
+        $query = DB::connection()->prepare('SELECT * FROM Viesti WHERE ketjuid = :ketjuid ORDER BY id ASC');
         $query->execute(array('ketjuid' => $ketjuId));
         $rows = $query->fetchAll();
         
@@ -82,10 +82,20 @@ class Viesti extends BaseModel {
         if ($this->sisalto == '') {
             $errors[] = 'Viesti ei saa olla tyhjä.';
         }
-        if (strlen($this->sisalto > 299)) {
+        if (strlen($this->sisalto) >= 299) {
             $errors[] = 'Viestin maksimipituus 300 merkkiä.';
         }
         return $errors;
+    }
+    
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Viesti SET SISALTO = :sisalto WHERE ID = :id');
+        $query->execute(array('id' => $this->id, 'sisalto' => $this->sisalto));
+    }
+    
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Viesti WHERE id = :id');
+        $query->execute(array('id' => $this->id));
     }
 
 }
