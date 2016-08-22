@@ -1,5 +1,11 @@
 # Tietokantasovelluksen esittelysivu
 
+Käyttäjätunnukset ohjaajalle:
+tunnus meetvurstimies
+salasana metukka1
+
+Foorumin etusivunäkymässä voi valita alueen tai kirjautua sisään. Alueella on listattuna sen ketjut, ja uuden ketjun voi luoda painamalla Uusi aihe-nappia. Ketjujen sisällä alhaalta voi luoda uuden viestin syöttämällä käyttäjä-id:n (vaikka 1) ja sisällön. Viestejä voi muokata muokkaa-napilla tai poistaa poista-napilla.
+
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://peltonpa.users.cs.helsinki.fi/foorumi/)
