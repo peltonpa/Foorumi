@@ -12,10 +12,10 @@ INSERT INTO Ketju (alueId, otsikko) VALUES (1, 'viina vie miestä');
 
 INSERT INTO Ketju (alueId, otsikko) VALUES (2, 'mun hepan nimi on meetvursti');
 
-INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (1, 1, 'viina vie', NOW());
+INSERT INTO Viesti (ketjuId, kayttajaId, sisalto) VALUES (1, 1, 'viina vie');
 
-INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (2, 2, 'jep', NOW());
+INSERT INTO Viesti (ketjuId, kayttajaId, sisalto) VALUES (2, 2, 'jep');
 
-INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (3, 2, 'ei hitto', NOW());
+INSERT INTO Viesti (ketjuId, kayttajaId, sisalto) VALUES (3, 2, 'ei hitto');
 
-INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (1, 1, 'eiii', NOW());
+INSERT INTO Viesti (ketjuId, kayttajaId, sisalto) VALUES (1, 1, 'eiii');

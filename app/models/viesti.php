@@ -12,11 +12,13 @@ class Viesti extends BaseModel {
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (:ketjuId, :kayttajaId, :sisalto, :paivays) RETURNING id');
 
-        $query->execute(array('ketjuId' => $this->ketjuId, 'kayttajaId' => $this->kayttajaId, 'sisalto' => $this->sisalto, 'paivays' => date("M Y d")));
+        $query->execute(array('ketjuId' => $this->ketjuId, 'kayttajaId' => $this->kayttajaId, 'sisalto' => $this->sisalto, 'paivays' => date("M Y d h:i:s")));
 
         $row = $query->fetch();
 
         $this->id = $row['id'];
+        
+        Ketju::find($this->ketjuId)->updatePaivays($this->paivays);
     }
 
     public static function all() {

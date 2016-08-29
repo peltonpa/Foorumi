@@ -2,7 +2,7 @@
 
 class Ketju extends BaseModel {
 
-    public $id, $alueId, $otsikko, $validators;
+    public $id, $alueId, $otsikko, $viimeinenViestiPaivays, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -10,9 +10,8 @@ class Ketju extends BaseModel {
     }
     
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Ketju (alueId, otsikko) VALUES (:alueId, :otsikko) RETURNING id');
-        
-        $query->execute(array('alueId' => $this->alueId, 'otsikko' => $this->otsikko));
+        $query = DB::connection()->prepare('INSERT INTO Ketju (alueId, otsikko, viimeinenViestiPaivays) VALUES (:alueId, :otsikko, :viimeinenViestiPaivays) RETURNING id');
+        $query->execute(array('alueId' => $this->alueId, 'otsikko' => $this->otsikko, 'viimeinenViestiPaivays' => time()));
         
         $row = $query->fetch();
         
@@ -87,6 +86,12 @@ class Ketju extends BaseModel {
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Ketju WHERE id = :id');
         $query->execute(array('id' => $this->id));
+    }
+    
+    public function updatePaivays($aika) {
+        $query = DB::connection()->prepare('UPDATE Ketju SET viimeinenViestiPaivays = :viimeinenViestiPaivays WHERE ID = :id');
+        $query->execute(array('id' => $this->id, 'viimeinenViestiPaivays' => $aika));
+    
     }
 
 }

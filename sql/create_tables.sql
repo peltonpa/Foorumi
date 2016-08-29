@@ -13,7 +13,8 @@ CREATE TABLE Alue(
 CREATE TABLE Ketju(
         id SERIAL PRIMARY KEY,
         alueId INTEGER REFERENCES Alue(id) NOT NULL,
-        otsikko varchar(40)
+        otsikko varchar(40),
+        viimeinenViestiPaivays TIMESTAMP DEFAULT now()
 );
 
 CREATE TABLE Viesti(
@@ -21,7 +22,7 @@ CREATE TABLE Viesti(
         ketjuId INTEGER REFERENCES Ketju(id),
 	kayttajaId INTEGER REFERENCES Kayttaja(id),
 	sisalto varchar(300) NOT NULL,
-	paivays DATE NOT NULL
+	paivays TIMESTAMP DEFAULT now()
 );
 
 

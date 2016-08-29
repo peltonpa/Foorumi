@@ -58,5 +58,7 @@ class KetjuController extends BaseController {
             Redirect::to('/alue/' . $params['alueid'], array('errors' => $errors));
         }
     }
+    
+    
 
 }
