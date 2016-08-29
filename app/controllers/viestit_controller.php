@@ -7,7 +7,6 @@ require 'app/models/ketju.php';
 class ViestiController extends BaseController {
 
     public static function index() {
-        self::check_logged_in();
         $viestit = Viesti::all();
 
         View::make('etusivu.html', array('viestit' => $viestit));

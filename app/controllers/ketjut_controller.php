@@ -8,14 +8,12 @@ require 'app/models/kayttaja.php';
 class KetjuController extends BaseController {
 
     public static function index() {
-        self::check_logged_in();
         $ketjut = Ketju::all();
 
         View::make('ketju/ketju.html', array('ketjut' => $ketjut));
     }
 
     public static function show($id) {
-        self::check_logged_in();
         $otsikko = Ketju::get_otsikko($id);
         $kirjoittajat = Kayttaja::all();
         $kirjoittajienNimet = array();
@@ -25,7 +23,7 @@ class KetjuController extends BaseController {
         }
         $viestit = Viesti::ketjun_viestit($id);
 
-        View::make('ketju/ketju.html', array('viestit' => $viestit, 'otsikko' => $otsikko, 'kirjoittajat' => $kirjoittajienNimet));
+        View::make('ketju/ketju.html', array('viestit' => $viestit, 'otsikko' => $otsikko, 'ketjuid' => $id, 'kirjoittajat' => $kirjoittajienNimet));
     }
 
     public static function uusiketju($id) {

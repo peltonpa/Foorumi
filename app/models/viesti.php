@@ -100,6 +100,7 @@ class Viesti extends BaseModel {
 
         //Jos poistettava viesti oli ketjun viimeinen jäljellä oleva viesti,
         // myös ketju poistetaan:
+        
         if (count(Viesti::ketjun_viestit($ketjuId)) == 0) {
             $ketju = Ketju::find($ketjuId);
             if ($ketju) {
@@ -107,5 +108,5 @@ class Viesti extends BaseModel {
             }
         }
     }
-
+    
 }

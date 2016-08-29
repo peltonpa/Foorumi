@@ -28,16 +28,16 @@
     <b>Ajankohta:</b>
     <mark>{{ viesti.paivays }}</mark>
     <blockquote>{{ viesti.sisalto }}</blockquote>
+    {% if user_logged_in.id == viesti.kayttajaId %}
     <a class="btn btn-warning btn-md" href="{{base_path}}/viesti/{{viesti.id}}/edit"><span class="glyphicon-cog"> Muokkaa </span></a> <a class="btn btn-danger btn-md" href="{{base_path}}/viesti/{{viesti.id}}/destroy"><span class="glyphicon glyphicon-trash"> &nbsp;Poista &nbsp;</span></a>
+    {% endif %}
 </pre>
 {% endfor %}
 
 <form method="post" action="{{base_path}}/ketju">
-    <label>ketjuid</label>
-    <input type="text" name="ketjuid" class="form-control">
-    <label>kayttajaid</label>
-    <input type="text" name="kayttajaid" class="form-control">
     <textarea name="sisalto" class="form-control" rows="4"></textarea>
     <button type="submit" class="btn btn-success">Lähetä viesti</button>
+    <input type="hidden" name="kayttajaid" value="{{user_logged_in.id}}"/>
+    <input type="hidden" name="ketjuid" value="{{ketjuid}}"/>
 </form>
 {% endblock %}
