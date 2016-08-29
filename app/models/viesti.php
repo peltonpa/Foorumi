@@ -8,14 +8,14 @@ class Viesti extends BaseModel {
         parent::__construct($attributes);
         $this->validators = array('validoi_sisalto');
     }
-    
-      public function save() {
+
+    public function save() {
         $query = DB::connection()->prepare('INSERT INTO Viesti (ketjuId, kayttajaId, sisalto, paivays) VALUES (:ketjuId, :kayttajaId, :sisalto, :paivays) RETURNING id');
-        
+
         $query->execute(array('ketjuId' => $this->ketjuId, 'kayttajaId' => $this->kayttajaId, 'sisalto' => $this->sisalto, 'paivays' => date("M Y d")));
-        
+
         $row = $query->fetch();
-        
+
         $this->id = $row['id'];
     }
 
@@ -52,19 +52,19 @@ class Viesti extends BaseModel {
                 'sisalto' => $row['sisalto'],
                 'paivays' => $row['paivays']
             ));
-            
+
             return $viesti;
         }
     }
-    
+
     public static function ketjun_viestit($ketjuId) {
-        $query = DB::connection()->prepare('SELECT * FROM Viesti WHERE ketjuid = :ketjuid ORDER BY id ASC');
+        $query = DB::connection()->prepare('SELECT * FROM Viesti WHERE ketjuId = :ketjuid ORDER BY id ASC');
         $query->execute(array('ketjuid' => $ketjuId));
         $rows = $query->fetchAll();
-        
+
         $viestit = array();
-        
-        foreach($rows as $row) {
+
+        foreach ($rows as $row) {
             $viestit[] = new Viesti(array(
                 'id' => $row['id'],
                 'ketjuId' => $row['ketjuid'],
@@ -73,10 +73,10 @@ class Viesti extends BaseModel {
                 'paivays' => $row['paivays']
             ));
         }
-        
+
         return $viestit;
     }
-    
+
     public function validoi_sisalto() {
         $errors = array();
         if ($this->sisalto == '') {
@@ -87,15 +87,25 @@ class Viesti extends BaseModel {
         }
         return $errors;
     }
-    
+
     public function update() {
         $query = DB::connection()->prepare('UPDATE Viesti SET SISALTO = :sisalto WHERE ID = :id');
         $query->execute(array('id' => $this->id, 'sisalto' => $this->sisalto));
     }
-    
+
     public function destroy() {
+        $ketjuId = $this->ketjuId;
         $query = DB::connection()->prepare('DELETE FROM Viesti WHERE id = :id');
         $query->execute(array('id' => $this->id));
+
+        //Jos poistettava viesti oli ketjun viimeinen jäljellä oleva viesti,
+        // myös ketju poistetaan:
+        if (count(Viesti::ketjun_viestit($ketjuId)) == 0) {
+            $ketju = Ketju::find($ketjuId);
+            if ($ketju) {
+                $ketju->destroy();
+            }
+        }
     }
 
 }

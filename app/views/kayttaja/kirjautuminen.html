@@ -9,6 +9,14 @@
 </div>
 {% endif %}
 
+{% if ulos %}
+<div class="alert alert-success">
+    <ul>
+        <li>{{ulos}}</li>
+    </ul>    
+</div>
+{% endif %}
+
 <form class="form-horizontal" method="post" action="{{base_path}}/kirjautuminen">
     <div class="form-group">
         <label for="username" class="col-sm-2 control-label">Kayttajatunnus</label>

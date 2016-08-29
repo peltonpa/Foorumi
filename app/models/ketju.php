@@ -51,6 +51,8 @@ class Ketju extends BaseModel {
 
             return $ketju;
         }
+        
+        return null;
     }
 
     public static function alueen_ketjut($id) {
@@ -80,6 +82,11 @@ class Ketju extends BaseModel {
             $errors[] = 'Otsikon maksimipituus 40 merkkiä.';
         }
         return $errors;
+    }
+    
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Ketju WHERE id = :id');
+        $query->execute(array('id' => $this->id));
     }
 
 }

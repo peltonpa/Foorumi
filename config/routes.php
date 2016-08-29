@@ -27,7 +27,7 @@ $routes->get('/kirjautuminen', function() {
 $routes->post('/kirjautuminen', function() {
     KayttajaController::kasittele();
 });
-    
+
 
 $routes->get('/alue/uusiketju/:id', function($id) {
     KetjuController::uusiketju($id);
@@ -51,5 +51,9 @@ $routes->post('/viesti/:id/edit', function($id) {
 
 $routes->get('/viesti/:id/destroy', function($id) {
     ViestiController::destroy($id);
+});
+
+$routes->get('/ulos', function() {
+    BaseController::logout(); 
 });
 
