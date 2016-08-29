@@ -28,6 +28,14 @@ $routes->post('/kirjautuminen', function() {
     KayttajaController::kasittele();
 });
 
+$routes->get('/rekisteroidy', function() {
+    KayttajaController::rekisterointi();
+});
+
+$routes->post('/rekisteroidy', function() {
+    KayttajaController::rekisteroidy(); 
+});
+
 
 $routes->get('/alue/uusiketju/:id', function($id) {
     KetjuController::uusiketju($id);

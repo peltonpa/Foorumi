@@ -1,0 +1,32 @@
+{% extends "base.html"%}
+{% block content %}
+
+{% if error %}
+<div class="alert alert-danger">
+    <ul>
+        <li>{{error}}</li>
+    </ul>
+</div>
+{% endif %}
+
+<form class="form-horizontal" method="post" action="{{base_path}}/rekisteroidy">
+    <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">Kayttajatunnus</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="kayttajatunnusInput" name="nimi" placeholder="kayttajatunnus">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">Salasana</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="salasanaInput" name="password" placeholder="salasana">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Rekisteröidy</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

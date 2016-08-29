@@ -19,14 +19,47 @@ class KayttajaController extends BaseController {
 
         $user = Kayttaja::authenticate($nimi, $password);
 
-        
+
         if (!$user) {
-            View::make('kayttaja/kirjautuminenh.tml', array('error' => 'Väärä käyttäjätunnus tai salasana.'));
+            View::make('kayttaja/kirjautuminen.html', array('error' => 'Väärä käyttäjätunnus tai salasana.'));
         } else {
             $_SESSION['user'] = $user->id;
 
             Redirect::to('/', array('kirjautuminenOnnistui' => 'Sisäänkirjautuminen onnistui, ' . $user->nimi . '.'));
         }
+    }
+
+    public static function rekisterointi() {
+        View::make('/kayttaja/rekisteroidy.html');
+    }
+    
+    public static function rekisteroidy() {
+        if(isset($_SESSION['user'])) {
+            Redirect::to('/', array('error' => 'Et voi rekisteröidä uutta käyttäjätunnusta kirjautuneena.'));
+        }
+        $params = $_POST;
+        $nimi = $params['nimi'];
+        $salasana = $params['password'];
+        
+        if(Kayttaja::findNimi($nimi)) {
+            Redirect::to('/', array('error' => 'Käyttäjänimi "' . $nimi . '" on jo varattu.'));
+        }
+        
+        $kayttaja = new Kayttaja(array(
+           'nimi' => $nimi,
+            'password' => $salasana
+        ));
+        
+        $errors = $kayttaja->errors();
+        
+        if (count($errors) == 0) {
+            $kayttaja->save();
+            
+            Redirect::to('/', array('onnistui' => "Rekisteröinti onnistui, voit nyt kirjautua sisään käyttäjätunnuksillasi."));
+        } else {
+            Redirect::to('/rekisteroidy', array('error' => $errors));
+        }
+        
     }
 
 }

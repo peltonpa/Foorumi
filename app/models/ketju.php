@@ -2,7 +2,7 @@
 
 class Ketju extends BaseModel {
 
-    public $id, $alueId, $otsikko;
+    public $id, $alueId, $otsikko, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
