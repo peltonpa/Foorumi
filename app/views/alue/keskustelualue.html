@@ -26,17 +26,18 @@
 </div>
 {% endif %}
 
-<h1 class="bg-success"<span class="glyphicon glyphicon-align-left"><br>&nbsp;&nbsp;{{ nimi }}</span><br><br></h1>
+<h1><span class="glyphicon glyphicon-comment" style="color:grey"></span>&nbsp;&nbsp;{{ nimi }}<br></h1><br>
 <table>
     <thead>
         <tr>
-            <th>Aihe</th>
+            <th><span class="glyphicon glyphicon-link"></span> &nbsp;Aihe</th>
         </tr>
     </thead>
+
     <tbody>
         {% for ketju in ketjut %}
         <tr>
-            <td><a href="{{base_path}}/ketju/{{ketju.id}}">{{ketju.otsikko}}&nbsp;</a></td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{base_path}}/ketju/{{ketju.id}}">{{ketju.otsikko}}&nbsp;</a></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -44,6 +45,6 @@
 
 <br>
 
-<a class="btn btn-warning" href="{{base_path}}/alue/uusiketju/{{alueid}}">Uusi aihe</a>
+<a class="btn btn-warning" href="{{base_path}}/alue/uusiketju/{{alueid}}"><span class="glyphicon glyphicon-plus"></span> &nbsp;Uusi aihe</a>
 
 {% endblock %}

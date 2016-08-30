@@ -2,7 +2,7 @@
 
 class Alue extends BaseModel {
 
-    public $id, $nimi, $viimeinenViesti, $viimeinenKirjoittaja, $aika;
+    public $id, $nimi, $viimeinenKetju;
 
     public function __construct($attributes) {
         parent::__construct($attributes);

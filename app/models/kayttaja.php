@@ -90,10 +90,13 @@ class Kayttaja extends BaseModel {
             $errors[] = 'Nimi ei saa olla tyhjä.';
         }
         if (strlen($this->nimi) > 49) {
-            $errors[] = 'Nimen maksimipituus on 49 merkkiä.';
+            $errors[] = 'Nimen maksimipituus on 50 merkkiä.';
         }
         if (strlen($this->password) == 0) {
             $errors[] = 'Salasanassa pitää olla ainakin 1 merkki. Skarppaa vähän.';
+        }
+        if (strlen($this->password) > 49) {
+            $errors[] = 'Salasanan maksimipituus on 50 merkkiä.';
         }
         return $errors;
     }

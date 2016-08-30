@@ -36,7 +36,7 @@
 
 <form method="post" action="{{base_path}}/ketju">
     <textarea name="sisalto" class="form-control" rows="4"></textarea>
-    <button type="submit" class="btn btn-success">Lähetä viesti</button>
+    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-envelope"></span> &nbsp;Lähetä viesti</button>
     <input type="hidden" name="kayttajaid" value="{{user_logged_in.id}}"/>
     <input type="hidden" name="ketjuid" value="{{ketjuid}}"/>
 </form>

@@ -42,7 +42,7 @@ class KayttajaController extends BaseController {
         $salasana = $params['password'];
         
         if(Kayttaja::findNimi($nimi)) {
-            Redirect::to('/', array('error' => 'Käyttäjänimi "' . $nimi . '" on jo varattu.'));
+            Redirect::to('/rekisteroidy', array('error' => 'Käyttäjänimi "' . $nimi . '" on jo varattu.'));
         }
         
         $kayttaja = new Kayttaja(array(

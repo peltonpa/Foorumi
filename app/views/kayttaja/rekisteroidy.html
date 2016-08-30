@@ -1,10 +1,12 @@
 {% extends "base.html"%}
 {% block content %}
-
+ 
 {% if error %}
 <div class="alert alert-danger">
     <ul>
-        <li>{{error}}</li>
+        {% for virhe in error %}
+        <li>{{virhe}}</li>
+        {% endfor %}
     </ul>
 </div>
 {% endif %}

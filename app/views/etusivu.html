@@ -1,12 +1,29 @@
 {% extends "base.html"%}
 {% block content %}
 
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
 {% if kirjautuminenOnnistui %}
 <div class="primary bg-info">
     <li>{{kirjautuminenOnnistui}}</li>
 </div>
 <br>
 {% endif %}
+
+{% if onnistui %}
+<div class="primary bg-info">
+    <li>{{onnistui}}</li>
+</div>
+{% endif %}
+<br>
 
 <form class="form-inline">
     <div class="form-group">
@@ -16,31 +33,21 @@
     <button type="submit" class="btn btn-default">Hae</button>
 </form>
 
-<h1 class="bg-success">&nbsp;&nbsp;Keskustelut</h1>
-
-{% if onnistui %}
-<div class="primary bg-info">
-    <li>{{onnistui}}</li>
-</div>
-{% endif %}
+<h1><span class="glyphicon glyphicon-comment" style="color:grey"></span>&nbsp;&nbsp;Keskustelut</h1><br>
 
 <table>
     <thead>
         <tr>
-            <th>Keskustelualue</th>
-            <th>Viimeisin viesti</th>
-            <th>Kirjoittaja</th>
-            <th>Päivämäärä</th>
+            <th><span class="glyphicon glyphicon-th-list"></span> &nbsp;&nbsp;Keskustelualue</th>
+            <th><span class="glyphicon glyphicon-envelope"></span> &nbsp;&nbsp;Viimeisin viesti</th>
         </tr>
     </thead>
 
     <tbody>
         {% for alue in alueet %}
         <tr>
-            <td><a href="{{base_path}}/alue/{{alue.id}}">{{alue.nimi}}&nbsp;</a></td>
-            <td><a href="#">Ominaisuus ei vielä tuettu&nbsp;</a></td>
-            <td>Ominaisuus ei vielä tuettu&nbsp;</td>
-            <td>Ominaisuus ei vielä tuettu&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{base_path}}/alue/{{alue.id}}">{{alue.nimi}}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{base_path}}/ketju/{{alue.viimeinenKetju.id}}">{{alue.viimeinenKetju.otsikko}}</a>&nbsp;</td>
         </tr>
         {% endfor %}
     </tbody>
