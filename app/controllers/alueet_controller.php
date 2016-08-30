@@ -8,7 +8,8 @@ class AlueController extends BaseController {
     
     public static function index() {
         $alueet = Alue::all();
-        View::make('etusivu.html', array('alueet' => $alueet));
+        $ketjut = haeEnsimmaiset();
+        View::make('etusivu.html', array('alueet' => $alueet, 'ketjut' => $ketjut));
     }
     
     public static function show($id) {
@@ -17,6 +18,16 @@ class AlueController extends BaseController {
         
         View::make('alue/keskustelualue.html', array('ketjut' => $ketjut, 'nimi' => $nimi, 'alueid' => $id));
         
+    }
+    
+    public static function haeEnsimmaiset() {
+        $ketjut = array();
+        $alueet = Alue::all();
+        foreach($alueet as $alue) {
+            $ketjulista = Ketju::alueen_ketjut($alue->id);
+            $ketjut[] = $ketjulista[0];
+        }
+        return $ketjut;
     }
     
     public static function sandbox() {
