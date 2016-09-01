@@ -11,12 +11,12 @@
 </div>
 {% endif %}
 
-<form method="post" action="{{base_path}}/viesti/{{viesti.id}}/edit">
+<form method="post" action="{{base_path}}/ketju/{{ketju.id}}/edit">
     <textarea name="sisalto" class="form-control" rows="4">{{viesti.sisalto}}</textarea>
-    <button type="submit" class="btn btn-success">Lähetä viesti</button>
+    <button type="submit" class="btn btn-success">Päivitä ketju</button>
     <input type="hidden" name="id" value="{{ketju.id}}"/>
-    <input type="hidden" name="ketjuid" value="{{ketju.alueId}}"/>
-    <input type="hidden" name="otsikko" value="{{ketju.kayttajaId}}"/>
+    <input type="hidden" name="ketjuid" value="{{viesti.ketjuId}}"/>
+    <input type="hidden" name="kayttajaid" value="{{viesti.kayttajaId}}"/>
     <input type="hidden" name="paivays" value="{{viesti.paivays}}"/>
 </form>
 

@@ -2,7 +2,7 @@
 
 class Ketju extends BaseModel {
 
-    public $id, $alueId, $otsikko, $viimeinenViestiPaivays, $validators;
+    public $id, $alueId, $otsikko, $viimeinenViestiPaivays, $perustaja, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -10,8 +10,8 @@ class Ketju extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Ketju (alueId, otsikko, viimeinenViestiPaivays) VALUES (:alueId, :otsikko, :viimeinenViestiPaivays) RETURNING id');
-        $query->execute(array('alueId' => $this->alueId, 'otsikko' => $this->otsikko, 'viimeinenViestiPaivays' => date("M Y d h:i:s")));
+        $query = DB::connection()->prepare('INSERT INTO Ketju (alueId, otsikko, viimeinenViestiPaivays, perustaja) VALUES (:alueId, :otsikko, :viimeinenViestiPaivays, :perustaja) RETURNING id');
+        $query->execute(array('alueId' => $this->alueId, 'otsikko' => $this->otsikko, 'viimeinenViestiPaivays' => date("M Y d h:i:s"), 'perustaja' => $this->perustaja));
 
         $row = $query->fetch();
 
@@ -30,7 +30,9 @@ class Ketju extends BaseModel {
             $ketjut[] = new Ketju(array(
                 'id' => $row['id'],
                 'alueId' => $row['alueid'],
-                'otsikko' => $row['otsikko']
+                'otsikko' => $row['otsikko'],
+                'viimeinenViestiPaivays' => $row['viimeinenviestipaivays'],
+                'perustaja' => $row['perustaja']
             ));
         }
         return $ketjut;
@@ -45,7 +47,9 @@ class Ketju extends BaseModel {
             $ketju = new Ketju(array(
                 'id' => $row['id'],
                 'alueId' => $row['alueid'],
-                'otsikko' => $row['otsikko']
+                'otsikko' => $row['otsikko'],
+                'viimeinenViestiPaivays' => $row['viimeinenviestipaivays'],
+                'perustaja' => $row['perustaja']
             ));
 
             return $ketju;

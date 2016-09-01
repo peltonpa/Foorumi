@@ -14,7 +14,8 @@ CREATE TABLE Ketju(
         id SERIAL PRIMARY KEY,
         alueId INTEGER REFERENCES Alue(id) NOT NULL,
         otsikko varchar(40),
-        viimeinenViestiPaivays TIMESTAMP DEFAULT now()
+        viimeinenViestiPaivays TIMESTAMP DEFAULT now(),
+        perustaja INTEGER REFERENCES Kayttaja(id)
 );
 
 CREATE TABLE Viesti(
