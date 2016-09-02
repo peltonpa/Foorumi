@@ -54,6 +54,10 @@ $routes->post('/ketju/:id/edit', function($id) {
     KetjuController::update($id);
 });
 
+$routes->get('/ketju/:id/poista', function($id) {
+    KetjuController::destroy($id);
+});
+
 $routes->get('/ketju/:id', function($id) {
     KetjuController::show($id);
 });

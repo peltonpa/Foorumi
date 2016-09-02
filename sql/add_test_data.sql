@@ -29,3 +29,13 @@ INSERT INTO Viesti (ketjuId, kayttajaId, sisalto) VALUES (3, 3, 'Jepulis kebulis
 INSERT INTO Viesti (ketjuId, kayttajaId, sisalto) VALUES (4, 2, 'Kartsa lähetkö pelaamaan bilistä kylille?');
 
 INSERT INTO Viesti (ketjuId, kayttajaId, sisalto) VALUES (4, 1, 'Ei pysty kun tulee emmerdale telkkarista');
+
+INSERT INTO Tagi (tagi) VALUES ('Pokemon');
+
+INSERT INTO Tagi (tagi) VALUES ('Järkipostaus');
+
+INSERT INTO Tagi (tagi) VALUES ('Politiikka');
+
+INSERT INTO Tagiliitos (ketjuId, tagiId) VALUES (1, 1);
+
+INSERT INTO Tagiliitos (ketjuId, tagiId) VALUES (1, 3);

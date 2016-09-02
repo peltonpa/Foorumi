@@ -20,19 +20,18 @@ CREATE TABLE Ketju(
 
 CREATE TABLE Viesti(
 	id SERIAL PRIMARY KEY,
-        ketjuId INTEGER REFERENCES Ketju(id),
+        ketjuId INTEGER REFERENCES Ketju(id) ON DELETE CASCADE,
 	kayttajaId INTEGER REFERENCES Kayttaja(id),
 	sisalto varchar(300) NOT NULL,
-	paivays CURRENT_TIMESTAMP
-);
-
-
-CREATE TABLE Tagiliitos(
-	ketjuId INTEGER REFERENCES Ketju(id),
-	tagiId INTEGER REFERENCES Tagi(id)
+	paivays TIMESTAMP DEFAULT now()
 );
 
 CREATE TABLE Tagi(
         id SERIAL PRIMARY KEY,
-        tagi varchar(20) NOT NULL
+        tagi varchar(30) NOT NULL
+);
+
+CREATE TABLE Tagiliitos(
+	ketjuId INTEGER REFERENCES Ketju(id) ON DELETE CASCADE,
+	tagiId INTEGER REFERENCES Tagi(id)
 );

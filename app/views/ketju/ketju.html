@@ -15,14 +15,19 @@
 {% if user_logged_in.id == ketju.perustaja %}
 <br>
 <a class="btn btn-warning btn-lg" href="{{base_path}}/ketju/{{ketju.id}}/ketjuedit">Muokkaa ketjua</a>
+<a class="btn btn-danger btn-lg" href="{{base_path}}/ketju/{{ketju.id}}/poista">Poista ketju</a>
 {% endif %}
-
-
 
 {% if onnistui %}
 <div class="primary bg-info">
     <li>{{onnistui}}</li>
 </div>
+{% endif %}
+
+{% if tagit %}
+{% for tagi in tagit %}
+<button class="btn btn-warning"> {{tagi.tagi}} </button>
+{% endfor %}
 {% endif %}
 
 <h1 class="bg-success">&nbsp;&nbsp;{{ otsikko }}</h1>

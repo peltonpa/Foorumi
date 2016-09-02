@@ -4,6 +4,7 @@ require 'app/models/ketju.php';
 require 'app/models/viesti.php';
 require 'app/models/alue.php';
 require 'app/models/kayttaja.php';
+require 'app/models/tagi.php';
 
 class KetjuController extends BaseController {
 
@@ -14,7 +15,8 @@ class KetjuController extends BaseController {
     }
 
     public static function show($id) {
-        $otsikko = Ketju::get_otsikko($id);
+        $tagit = Tagi::ketjunTagit($id);
+        $otsikko = Ketju::find($id)->otsikko;
         $kirjoittajat = Kayttaja::all();
         $kirjoittajienNimet = array();
         $ketju = Ketju::find($id);
@@ -24,7 +26,7 @@ class KetjuController extends BaseController {
         }
         $viestit = Viesti::ketjun_viestit($id);
 
-        View::make('ketju/ketju.html', array('viestit' => $viestit, 'otsikko' => $otsikko, 'ketjuid' => $id, 'kirjoittajat' => $kirjoittajienNimet, 'ketju' => $ketju));
+        View::make('ketju/ketju.html', array('tagit' => $tagit, 'viestit' => $viestit, 'otsikko' => $otsikko, 'ketjuid' => $id, 'kirjoittajat' => $kirjoittajienNimet, 'ketju' => $ketju));
     }
 
     public static function uusiketju($id) {
@@ -92,6 +94,12 @@ class KetjuController extends BaseController {
         }        
     }
     
-    
+    public static function destroy($id) {
+        self::check_logged_in();
+        $ketju = new Ketju(array('id' => $id));
+        $ketju->destroy();
+        
+        Redirect::to('/etusivu', array('onnistui' => 'Ketju poistettu.'));
+    }
 
 }
