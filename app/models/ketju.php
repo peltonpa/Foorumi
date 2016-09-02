@@ -94,7 +94,7 @@ class Ketju extends BaseModel {
         if ($this->otsikko == '') {
             $errors[] = 'Otsikko ei saa olla tyhjä.';
         }
-        if (strlen($this->otsikko > 39)) {
+        if (strlen($this->otsikko) > 39) {
             $errors[] = 'Otsikon maksimipituus 40 merkkiä.';
         }
         return $errors;
@@ -108,6 +108,11 @@ class Ketju extends BaseModel {
     public function updatePaivays($aika) {
         $query = DB::connection()->prepare('UPDATE Ketju SET viimeinenViestiPaivays = :viimeinenViestiPaivays WHERE ID = :id');
         $query->execute(array('id' => $this->id, 'viimeinenViestiPaivays' => $aika));
+    }
+    
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Ketju SET otsikko = :otsikko WHERE ID = :id');
+        $query->execute(array('id' => $this->id, 'otsikko' => $this->otsikko));
     }
 
 }

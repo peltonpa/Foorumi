@@ -16,7 +16,7 @@ INSERT INTO Ketju (alueId, otsikko, perustaja) VALUES (1, 'Olen diletantti', 1);
 
 INSERT INTO Ketju (alueId, otsikko, perustaja) VALUES (2, 'Voihan vitsi', 3);
 
-INSERT INTO Ketju (alueId, otsikko) VALUES (3, 'Painavaa sanottavaa', 2);
+INSERT INTO Ketju (alueId, otsikko, perustaja) VALUES (3, 'Painavaa sanottavaa', 2);
 
 INSERT INTO Viesti (ketjuId, kayttajaId, sisalto) VALUES (1, 1, 'Joo kokeillaans');
 

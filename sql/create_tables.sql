@@ -23,7 +23,7 @@ CREATE TABLE Viesti(
         ketjuId INTEGER REFERENCES Ketju(id),
 	kayttajaId INTEGER REFERENCES Kayttaja(id),
 	sisalto varchar(300) NOT NULL,
-	paivays TIMESTAMP DEFAULT now()
+	paivays CURRENT_TIMESTAMP
 );
 
 

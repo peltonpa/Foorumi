@@ -17,13 +17,14 @@ class KetjuController extends BaseController {
         $otsikko = Ketju::get_otsikko($id);
         $kirjoittajat = Kayttaja::all();
         $kirjoittajienNimet = array();
+        $ketju = Ketju::find($id);
 
         foreach ($kirjoittajat as $kirjoittaja) {
             $kirjoittajienNimet[] = $kirjoittaja->nimi;
         }
         $viestit = Viesti::ketjun_viestit($id);
 
-        View::make('ketju/ketju.html', array('viestit' => $viestit, 'otsikko' => $otsikko, 'ketjuid' => $id, 'kirjoittajat' => $kirjoittajienNimet));
+        View::make('ketju/ketju.html', array('viestit' => $viestit, 'otsikko' => $otsikko, 'ketjuid' => $id, 'kirjoittajat' => $kirjoittajienNimet, 'ketju' => $ketju));
     }
 
     public static function uusiketju($id) {
@@ -37,13 +38,14 @@ class KetjuController extends BaseController {
 
         $ketju = new Ketju(array(
             'alueId' => $params['alueid'],
-            'otsikko' => $params['otsikko']
+            'otsikko' => $params['otsikko'],
+            'perustaja' => $params['perustaja']
         ));
 
         $errors = $ketju->errors();
 
         $viesti = new Viesti(array(
-            'kayttajaId' => $params['kayttajaid'],
+            'kayttajaId' => $params['perustaja'],
             'sisalto' => $params['sisalto']
         ));
 
@@ -57,6 +59,37 @@ class KetjuController extends BaseController {
         } else {
             Redirect::to('/alue/' . $params['alueid'], array('errors' => $errors));
         }
+    }
+    
+    public static function edit($id) {
+        self::check_logged_in();
+        $ketju = Ketju::find($id);
+        View::make('/ketju/ketjuedit.html', array('ketju' => $ketju));
+    }
+    
+    public static function update($id) {
+        self::check_logged_in();
+        $params = $_POST;
+                
+        $attributes = array(
+            'id' => $id,
+            'alueId' => $params['alueid'],
+            'otsikko' => $params['otsikko'],
+            'viimeinenViestiPaivays' => $params['viimeinenviestipaivays'],
+            'perustaja' => $params['perustaja']
+        );
+        
+        $ketju = new Ketju($attributes);
+        $palautusketju = Ketju::find($id);
+        $errors = $ketju->errors();
+        
+        if(count($errors) > 0) {
+            View::make('/ketju/ketjuedit.html', array('errors' => $errors, 'attributes' => $attributes, 'ketju' => $palautusketju));
+        } else {
+            $ketju->update();
+            
+            Redirect::to('/ketju/' . $params['id'], array('onnistui' => 'Ketjua muokattiin onnistuneesti.'));
+        }        
     }
     
     

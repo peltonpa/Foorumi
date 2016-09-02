@@ -12,6 +12,13 @@
 </div>
 {% endif %}
 
+{% if user_logged_in.id == ketju.perustaja %}
+<br>
+<a class="btn btn-warning btn-lg" href="{{base_path}}/ketju/{{ketju.id}}/ketjuedit">Muokkaa ketjua</a>
+{% endif %}
+
+
+
 {% if onnistui %}
 <div class="primary bg-info">
     <li>{{onnistui}}</li>

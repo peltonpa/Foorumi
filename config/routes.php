@@ -12,10 +12,6 @@ $routes->get('/etusivu', function() {
     AlueController::index();
 });
 
-$routes->post('/ketju', function() {
-    ViestiController::store();
-});
-
 $routes->post('/uusiketju', function() {
     KetjuController::store();
 });
@@ -45,6 +41,19 @@ $routes->get('/alue/:id', function($id) {
     AlueController::show($id);
 });
 
+
+$routes->post('/ketju', function() {
+    ViestiController::store();
+});
+
+$routes->get('/ketju/:id/ketjuedit', function($id) {
+    KetjuController::edit($id);
+});
+
+$routes->post('/ketju/:id/edit', function($id) {
+    KetjuController::update($id);
+});
+
 $routes->get('/ketju/:id', function($id) {
     KetjuController::show($id);
 });
@@ -64,4 +73,3 @@ $routes->get('/viesti/:id/destroy', function($id) {
 $routes->get('/ulos', function() {
     BaseController::logout(); 
 });
-
