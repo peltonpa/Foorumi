@@ -31,12 +31,16 @@ class KetjuController extends BaseController {
 
     public static function uusiketju($id) {
         self::check_logged_in();
-        View::make('alue/uusiketju.html', array('alueid' => $id));
+        $tagit = Tagi::all();
+        View::make('alue/uusiketju.html', array('alueid' => $id, 'tagit' => $tagit));
     }
 
     public static function store() {
         self::check_logged_in();
         $params = $_POST;
+        if (isset($params['tagi'])) {
+            $tagit = $params['tagi'];
+        }
 
         $ketju = new Ketju(array(
             'alueId' => $params['alueid'],
@@ -57,6 +61,13 @@ class KetjuController extends BaseController {
             $ketju->save();
             $viesti->ketjuId = $ketju->id;
             $viesti->save();
+            if (isset($tagit)) {
+                foreach ($tagit as $tagi) {
+                    $tag = Tagi::find($tagi);
+                    $tag->save($ketju->id);
+                }
+            }
+
             Redirect::to('/ketju/' . $ketju->id, array('onnistui' => "Uusi aihe luotiin onnistuneesti."));
         } else {
             Redirect::to('/alue/' . $params['alueid'], array('errors' => $errors));
@@ -67,15 +78,19 @@ class KetjuController extends BaseController {
         self::check_logged_in();
         $ketju = Ketju::find($id);
         $tagit = Tagi::all();
+
         View::make('/ketju/ketjuedit.html', array('ketju' => $ketju, 'tagit' => $tagit));
     }
 
     public static function update($id) {
         self::check_logged_in();
         $params = $_POST;
-        
-        $tagit = $params['tagi'];
-        
+
+        if (isset($params['tagi'])) {
+            $tagit = $params['tagi'];
+        }
+
+
         $attributes = array(
             'id' => $id,
             'alueId' => $params['alueid'],
@@ -93,10 +108,12 @@ class KetjuController extends BaseController {
         } else {
             $ketju->update();
             $ketju->poistaTagit();
-            
-            foreach ($tagit as $tagi) {
-                $tag = Tagi::find($tagi);
-                $tag->save($ketju->id);
+
+            if (isset($tagit)) {
+                foreach ($tagit as $tagi) {
+                    $tag = Tagi::find($tagi);
+                    $tag->save($ketju->id);
+                }
             }
 
             Redirect::to('/ketju/' . $params['id'], array('onnistui' => 'Ketjua muokattiin onnistuneesti.'));

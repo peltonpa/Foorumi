@@ -23,13 +23,17 @@
     <li>{{onnistui}}</li>
 </div>
 {% endif %}
+<br>
 
 {% if tagit %}
+<br>
 <div><span class="glyphicon glyphicon-tags"> &nbsp;</span>Tagit: </div>
 {% for tagi in tagit %}
-<button class="btn btn-warning"> {{tagi.tagi}} </button>
+<button class="btn btn-info"> {{tagi.tagi}} </button>
 {% endfor %}
+<br>
 {% endif %}
+
 
 <h1>&nbsp;&nbsp;{{ otsikko }}</h1>
 <br>

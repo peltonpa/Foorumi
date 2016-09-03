@@ -5,6 +5,16 @@
 <form method="post" action="{{base_path}}/uusiketju">
     <textarea name="otsikko" class="form-control" rows="1" placeholder="Otsikko"></textarea>
     <textarea name="sisalto" class="form-control" rows="4"></textarea>
+     <br>
+    <span class="glyphicon glyphicon-tags"></span><b> &nbsp;Tagit: </b>
+    {% for tagi in tagit %}
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="tagi[]" value="{{tagi.id}}"/>
+            {{tagi.tagi}}
+        </label>
+    </div>
+    {% endfor %}
     <button type="submit" class="btn btn-success">Lähetä viesti</button>
     <input type="hidden" name="perustaja" value="{{user_logged_in.id}}"/>
     <input type="hidden" name="url" value="" />
