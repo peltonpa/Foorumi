@@ -52,7 +52,7 @@ class KetjuController extends BaseController {
         ));
 
         $errors = array_merge($errors, $viesti->errors());
-        
+
         if (count($errors) == 0) {
             $ketju->save();
             $viesti->ketjuId = $ketju->id;
@@ -62,17 +62,20 @@ class KetjuController extends BaseController {
             Redirect::to('/alue/' . $params['alueid'], array('errors' => $errors));
         }
     }
-    
+
     public static function edit($id) {
         self::check_logged_in();
         $ketju = Ketju::find($id);
-        View::make('/ketju/ketjuedit.html', array('ketju' => $ketju));
+        $tagit = Tagi::all();
+        View::make('/ketju/ketjuedit.html', array('ketju' => $ketju, 'tagit' => $tagit));
     }
-    
+
     public static function update($id) {
         self::check_logged_in();
         $params = $_POST;
-                
+        
+        $tagit = $params['tagi'];
+        
         $attributes = array(
             'id' => $id,
             'alueId' => $params['alueid'],
@@ -80,25 +83,31 @@ class KetjuController extends BaseController {
             'viimeinenViestiPaivays' => $params['viimeinenviestipaivays'],
             'perustaja' => $params['perustaja']
         );
-        
+
         $ketju = new Ketju($attributes);
         $palautusketju = Ketju::find($id);
         $errors = $ketju->errors();
-        
-        if(count($errors) > 0) {
+
+        if (count($errors) > 0) {
             View::make('/ketju/ketjuedit.html', array('errors' => $errors, 'attributes' => $attributes, 'ketju' => $palautusketju));
         } else {
             $ketju->update();
+            $ketju->poistaTagit();
             
+            foreach ($tagit as $tagi) {
+                $tag = Tagi::find($tagi);
+                $tag->save($ketju->id);
+            }
+
             Redirect::to('/ketju/' . $params['id'], array('onnistui' => 'Ketjua muokattiin onnistuneesti.'));
-        }        
+        }
     }
-    
+
     public static function destroy($id) {
         self::check_logged_in();
         $ketju = new Ketju(array('id' => $id));
         $ketju->destroy();
-        
+
         Redirect::to('/etusivu', array('onnistui' => 'Ketju poistettu.'));
     }
 

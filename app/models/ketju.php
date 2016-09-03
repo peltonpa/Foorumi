@@ -83,6 +83,11 @@ class Ketju extends BaseModel {
 
         return $palautusketjut;
     }
+    
+    public function poistaTagit() {
+        $query = DB::connection()->prepare('DELETE FROM Tagiliitos WHERE ketjuId = :id');
+        $query->execute(array('id' => $this->id));
+    }
 
     public static function get_otsikko($id) {
         $ketju = self::find($id);

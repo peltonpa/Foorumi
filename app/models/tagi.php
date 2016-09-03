@@ -34,15 +34,13 @@ class Tagi extends BaseModel {
 
         $rows = $query->fetchAll();
 
-        Kint::dump($rows);
-        
         if ($rows) {
             foreach ($rows as $row) {
                 $tagi = self::find($row['tagiid']);
                 $tagit[] = $tagi;
             }
         }
-        Kint::dump($tagit);
+
         return $tagit;
     }
 
@@ -60,6 +58,11 @@ class Tagi extends BaseModel {
         }
 
         return $tagi;
+    }
+    
+    public function save($ketjuid) {
+        $query = DB::connection()->prepare('INSERT INTO Tagiliitos (ketjuId, tagiId) VALUES (:ketjuid, :tagiid)');
+        $query->execute(array('ketjuid' => $ketjuid, 'tagiid' => $this->id));
     }
 
 }

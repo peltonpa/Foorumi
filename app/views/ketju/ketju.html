@@ -25,12 +25,13 @@
 {% endif %}
 
 {% if tagit %}
+<div><span class="glyphicon glyphicon-tags"> &nbsp;</span>Tagit: </div>
 {% for tagi in tagit %}
 <button class="btn btn-warning"> {{tagi.tagi}} </button>
 {% endfor %}
 {% endif %}
 
-<h1 class="bg-success">&nbsp;&nbsp;{{ otsikko }}</h1>
+<h1>&nbsp;&nbsp;{{ otsikko }}</h1>
 <br>
 
 {% for viesti in viestit  %}
@@ -41,7 +42,7 @@
     <mark>{{ viesti.paivays }}</mark>
     <blockquote>{{ viesti.sisalto }}</blockquote>
     {% if user_logged_in.id == viesti.kayttajaId %}
-    <a class="btn btn-warning btn-md" href="{{base_path}}/viesti/{{viesti.id}}/edit"><span class="glyphicon-cog"> Muokkaa </span></a> <a class="btn btn-danger btn-md" href="{{base_path}}/viesti/{{viesti.id}}/destroy"><span class="glyphicon glyphicon-trash"> &nbsp;Poista &nbsp;</span></a>
+    <a class="btn btn-warning btn-md" href="{{base_path}}/viesti/{{viesti.id}}/edit"><span class="glyphicon-cog"></span> Muokkaa </a> <a class="btn btn-danger btn-md" href="{{base_path}}/viesti/{{viesti.id}}/destroy"><span class="glyphicon glyphicon-trash"> &nbsp;Poista &nbsp;</span></a>
     {% endif %}
 </pre>
 {% endfor %}

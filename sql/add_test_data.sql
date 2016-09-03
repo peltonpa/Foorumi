@@ -36,6 +36,12 @@ INSERT INTO Tagi (tagi) VALUES ('Järkipostaus');
 
 INSERT INTO Tagi (tagi) VALUES ('Politiikka');
 
+INSERT INTO Tagi (tagi) VALUES ('Urheilu');
+
+INSERT INTO Tagi (tagi) VALUES ('Uutinen');
+
 INSERT INTO Tagiliitos (ketjuId, tagiId) VALUES (1, 1);
+
+INSERT INTO Tagiliitos (ketjuId, tagiId) VALUES (1, 4);
 
 INSERT INTO Tagiliitos (ketjuId, tagiId) VALUES (1, 3);
